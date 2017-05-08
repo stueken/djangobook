@@ -99,3 +99,5 @@ ENV/
 # sqlite database
 *.sqlite3
 
+# vim swap files
+*.swp
