@@ -12,19 +12,25 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from books import views
-from mysite.views import contact, current_datetime, display_meta, hello, hours_ahead
+from . import views
+from books import views as books_views
 
+time_patterns = [
+    url(r'^$', views.current_datetime),
+    url(r'^plus/(\d{1,2})/$', views.hours_ahead),
+]
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^meta/$', display_meta),
-    url(r'^hello/$', hello),
-    url(r'^time/$', current_datetime),
-    url(r'^search/$', views.search),
-    url(r'^time/plus/(\d{1,2})/$', hours_ahead),
-    url(r'^contact/$', contact),
+    url(r'^hello/$', views.hello),
+    url(r'^time/', include(time_patterns)),
+    url(r'^search/$', books_views.search),
+    url(r'^contact/$', views.contact),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [url(r'^meta/$', views.display_meta), ]
