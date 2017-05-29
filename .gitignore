@@ -100,4 +100,5 @@ ENV/
 *.sqlite3
 
 # vim swap files
+*.swo
 *.swp
