@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
-from books.models import Book
+from books.models import Book, Publisher
 
 
 def search(request):
@@ -15,3 +16,7 @@ def search(request):
             books = Book.objects.filter(title__icontains=q)
             return render(request, 'search_results.html', {'books': books, 'query': q})
     return render(request, 'search_form.html', {'errors': errors})
+
+
+class PublisherList(ListView):
+    model = Publisher

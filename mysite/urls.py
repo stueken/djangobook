@@ -18,6 +18,7 @@ from django.contrib import admin
 
 from . import views
 from books import views as books_views
+from books.views import PublisherList
 
 time_patterns = [
     url(r'^$', views.current_datetime),
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^time/', include(time_patterns)),
     url(r'^search/$', books_views.search),
     url(r'^contact/$', views.contact),
+    url(r'^publishers/$', PublisherList.as_view()),
 ]
 
 if settings.DEBUG:
