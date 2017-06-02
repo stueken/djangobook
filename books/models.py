@@ -21,6 +21,7 @@ class Author(models.Model):
     name = models.CharField(max_length=200, default="No Name")
     email = models.EmailField(blank=True)
     headshot = models.ImageField(upload_to='author_headshots', blank=True)
+    last_accessed = models.DateTimeField()
 
     def __str__(self):
         return self.name
@@ -33,7 +34,8 @@ class BookManager(models.Manager):
 
 class DahlBookManager(models.Manager):
     def get_queryset(self):
-        return super(DahlBookManager, self).get_queryset().filter(author='Roald Dahl')
+        return super(DahlBookManager, self).get_queryset().filter(
+            author='Roald Dahl')
 
 
 class Book(models.Model):

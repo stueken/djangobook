@@ -18,7 +18,7 @@ from django.contrib import admin
 
 from . import views
 from books import views as books_views
-from books.views import PublisherList
+from books.views import AuthorDetailView, PublisherBookList, PublisherList
 
 time_patterns = [
     url(r'^$', views.current_datetime),
@@ -32,6 +32,9 @@ urlpatterns = [
     url(r'^search/$', books_views.search),
     url(r'^contact/$', views.contact),
     url(r'^publishers/$', PublisherList.as_view()),
+    url(r'^books/([\w-]+)/$', PublisherBookList.as_view()),
+    url(r'^authors/(?P<pk>[0-9]+)/$', AuthorDetailView.as_view(),
+        name='author-detail')
 ]
 
 if settings.DEBUG:
