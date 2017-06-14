@@ -1,4 +1,7 @@
+import datetime
+
 from django.db import models
+from django.utils import timezone
 
 
 class Publisher(models.Model):
@@ -49,3 +52,6 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def recent_publication(self):
+        return self.publication_date >= timezone.now().date() - datetime.timedelta(weeks=8)
