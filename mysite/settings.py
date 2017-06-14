@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'books',
+    'my_user_profile_app',
 )
 
 MIDDLEWARE_CLASSES = (
