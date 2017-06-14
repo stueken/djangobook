@@ -1,8 +1,10 @@
 import datetime
 
 from django.core import mail
+from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
+from django.utils.six import StringIO
 
 from .models import Book
 
@@ -32,3 +34,10 @@ class EmailTest(TestCase):
 
         # Verify that the subject of the first message is correct.
         self.assertEqual(mail.outbox[0].subject, 'Subject here')
+
+
+class ClosepollTest(TestCase):
+    def test_command_output(self):
+        out = StringIO()
+        call_command('closepoll', stdout=out)
+        self.assertIn('Expected output', out.getvalue())
